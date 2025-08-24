@@ -331,6 +331,27 @@
             padding-bottom: 10px;
             border-bottom: 1px solid #ff003c;
         }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .status-online {
+            background-color: #00ff41;
+            box-shadow: 0 0 5px #00ff41;
+        }
+        
+        .status-offline {
+            background-color: #ff003c;
+        }
+        
+        .status-unknown {
+            background-color: #ffcc00;
+        }
     </style>
 </head>
 <body>
@@ -352,6 +373,7 @@
             <div class="tab" data-tab="exploit">Exploit ช่องโหว่</div>
             <div class="tab" data-tab="leaked">ข้อมูลรั่วไหล</div>
             <div class="tab" data-tab="network">เครือข่าย</div>
+            <div class="tab" data-tab="advanced">ขั้นสูง</div>
         </div>
         
         <div class="tab-content active" id="password-tab">
@@ -367,6 +389,8 @@
                 <button id="dictionary" class="glow">Dictionary Attack</button>
                 <button id="cred-stuffing" class="glow">Credential Stuffing</button>
                 <button id="find-login" class="glow">ค้นหาหน้า Login</button>
+                <button id="hydra" class="glow">Hydra Attack</button>
+                <button id="john" class="glow">John the Ripper</button>
             </div>
             
             <div class="input-group">
@@ -532,6 +556,8 @@ moscow</textarea>
                 <button id="scan-xss" class="glow">สแกน XSS</button>
                 <button id="scan-lfi" class="glow">สแกน LFI/RFI</button>
                 <button id="scan-rce" class="glow">สแกน RCE</button>
+                <button id="scan-idor" class="glow">สแกน IDOR</button>
+                <button id="scan-ssrf" class="glow">สแกน SSRF</button>
                 <button id="full-scan" class="glow">สแกนแบบเต็ม</button>
             </div>
             
@@ -563,6 +589,8 @@ moscow</textarea>
                     <option value="lfi">Local File Inclusion</option>
                     <option value="rce">Remote Code Execution</option>
                     <option value="upload">File Upload</option>
+                    <option value="idor">IDOR</option>
+                    <option value="ssrf">SSRF</option>
                 </select>
             </div>
             
@@ -572,6 +600,8 @@ moscow</textarea>
             </div>
             
             <button id="run-exploit" class="glow">รัน Exploit</button>
+            <button id="generate-payload" class="glow">สร้าง Payload</button>
+            <button id="auto-exploit" class="glow">Auto Exploit</button>
             
             <div class="progress-bar">
                 <div class="progress" id="exploit-progress"></div>
@@ -593,7 +623,12 @@ moscow</textarea>
                 <input type="text" id="search-query" placeholder="อีเมล, ชื่อผู้ใช้, หรือโดเมน" value="">
             </div>
             
-            <button id="search-leaked" class="glow">ค้นหาข้อมูลรั่วไหล</button>
+            <div class="button-group">
+                <button id="search-leaked" class="glow">ค้นหาข้อมูลรั่วไหล</button>
+                <button id="check-pwned" class="glow">ตรวจสอบ Pwned</button>
+                <button id="breach-search" class="glow">ค้นหา Breach</button>
+                <button id="download-db" class="glow">ดาวน์โหลด Database</button>
+            </div>
             
             <div class="progress-bar">
                 <div class="progress" id="leaked-progress"></div>
@@ -625,6 +660,8 @@ moscow</textarea>
                 <button id="dos-attack" class="glow">DoS Attack</button>
                 <button id="arp-spoof" class="glow">ARP Spoofing</button>
                 <button id="scan-services" class="glow">สแกนบริการ</button>
+                <button id="packet-sniff" class="glow">Packet Sniffing</button>
+                <button id="mitm" class="glow">Man-in-the-Middle</button>
             </div>
             
             <div class="progress-bar">
@@ -635,6 +672,41 @@ moscow</textarea>
                 <div class="result-item">
                     <strong>ยังไม่มีการโจมตีเครือข่าย</strong><br>
                     ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการโจมตี
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="advanced-tab">
+            <h2>เครื่องมือขั้นสูง</h2>
+            
+            <div class="input-group">
+                <label for="advanced-target">เป้าหมาย:</label>
+                <input type="text" id="advanced-target" placeholder="URL, IP หรือ Domain" value="">
+            </div>
+            
+            <div class="button-group">
+                <button id="web-shell" class="glow">Upload Web Shell</button>
+                <button id="reverse-shell" class="glow">Reverse Shell</button>
+                <button id="hash-crack" class="glow">Crack Hash</button>
+                <button id="subdomain" class="glow">ค้นหา Subdomain</button>
+                <button id="dir-buster" class="glow">Dir Buster</button>
+                <button id="social-engineer" class="glow">Social Engineering</button>
+                <button id="zero-day" class="glow">Zero-Day Exploit</button>
+            </div>
+            
+            <div class="input-group">
+                <label for="hash-input">Hash (สำหรับ Crack):</label>
+                <input type="text" id="hash-input" placeholder="5f4dcc3b5aa765d61d8327deb882cf99" value="">
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="advanced-progress"></div>
+            </div>
+            
+            <div class="results" id="advanced-results">
+                <div class="result-item">
+                    <strong>ยังไม่มีการใช้งานเครื่องมือ</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากใช้งานเครื่องมือ
                 </div>
             </div>
         </div>
@@ -948,6 +1020,189 @@ moscow</textarea>
             }, 50);
         });
         
+        // ฟังก์ชันรัน Exploit
+        document.getElementById('run-exploit').addEventListener('click', () => {
+            const targetUrl = document.getElementById('exploit-target-url').value;
+            const exploitType = document.getElementById('exploit-type').value;
+            
+            if (!targetUrl) {
+                addLog('กรุณาระบุ URL เป้าหมาย', 'error');
+                return;
+            }
+            
+            addLog(`กำลังรัน Exploit: ${targetUrl} (${exploitType})`, 'success');
+            
+            const progressBar = document.getElementById('exploit-progress');
+            const resultsContainer = document.getElementById('exploit-results');
+            resultsContainer.innerHTML = '';
+            
+            let progress = 0;
+            
+            const exploitInterval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(exploitInterval);
+                    
+                    // สุ่มผลลัพธ์
+                    if (Math.random() > 0.3) {
+                        if (exploitType === 'sql') {
+                            resultsContainer.innerHTML = `
+                                <div class="result-item found">
+                                    <strong>Exploit สำเร็จ!</strong><br>
+                                    สามารถดึงข้อมูลจากฐานข้อมูลได้:<br>
+                                    <div class="credential-list">
+                                        <div class="credential-item">admin:5f4dcc3b5aa765d61d8327deb882cf99 (password)</div>
+                                        <div class="credential-item">user:7c6a180b36896a0a8c02787eeafb0e4c (password1)</div>
+                                        <div class="credential-item">test:6cb75f652a9b52798eb6cf2201057c73 (password123)</div>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            addLog('Exploit SQL Injection สำเร็จ', 'success');
+                        } else if (exploitType === 'xss') {
+                            resultsContainer.innerHTML = `
+                                <div class="result-item found">
+                                    <strong>Exploit สำเร็จ!</strong><br>
+                                    XSS Payload ทำงานแล้ว:<br>
+                                    &lt;script&gt;alert('XSS')&lt;/script&gt;
+                                </div>
+                            `;
+                            
+                            addLog('Exploit XSS สำเร็จ', 'success');
+                        }
+                    } else {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>Exploit ไม่สำเร็จ</strong><br>
+                                ไม่สามารถ exploit ช่องโหว่ได้
+                            </div>
+                        `;
+                        addLog('Exploit ไม่สำเร็จ', 'error');
+                    }
+                }
+            }, 100);
+        });
+        
+        // ฟังก์ชันสแกนพอร์ต
+        document.getElementById('scan-ports').addEventListener('click', () => {
+            const targetIp = document.getElementById('target-ip').value;
+            
+            if (!targetIp) {
+                addLog('กรุณาระบุเป้าหมาย', 'error');
+                return;
+            }
+            
+            addLog(`กำลังสแกนพอร์ต: ${targetIp}`, 'success');
+            
+            const progressBar = document.getElementById('network-progress');
+            const resultsContainer = document.getElementById('network-results');
+            resultsContainer.innerHTML = '';
+            
+            let progress = 0;
+            
+            const scanInterval = setInterval(() => {
+                progress += 3;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(scanInterval);
+                    
+                    // สุ่มผลลัพธ์
+                    const openPorts = [21, 22, 80, 443, 3306, 3389];
+                    const foundPorts = [];
+                    
+                    for (let i = 0; i < 4; i++) {
+                        if (Math.random() > 0.4) {
+                            foundPorts.push(openPorts[Math.floor(Math.random() * openPorts.length)]);
+                        }
+                    }
+                    
+                    if (foundPorts.length > 0) {
+                        let portsHTML = '';
+                        foundPorts.forEach(port => {
+                            portsHTML += `<li>พอร์ต ${port} - เปิด</li>`;
+                        });
+                        
+                        resultsContainer.innerHTML = `
+                            <div class="result-item found">
+                                <strong>พบพอร์ตที่เปิด!</strong><br>
+                                พอร์ตที่เปิดบน ${targetIp}:<br>
+                                <ul>${portsHTML}</ul>
+                            </div>
+                        `;
+                        
+                        addLog(`พบพอร์ตที่เปิด: ${foundPorts.join(', ')}`, 'success');
+                    } else {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>ไม่พบพอร์ตที่เปิด</strong><br>
+                                ไม่พบพอร์ตที่เปิดบน ${targetIp}
+                            </div>
+                        `;
+                        addLog('ไม่พบพอร์ตที่เปิด', 'error');
+                    }
+                }
+            }, 100);
+        });
+        
+        // ฟังก์ชัน Crack Hash
+        document.getElementById('hash-crack').addEventListener('click', () => {
+            const hash = document.getElementById('hash-input').value;
+            
+            if (!hash) {
+                addLog('กรุณาระบุ Hash', 'error');
+                return;
+            }
+            
+            addLog(`กำลัง Crack Hash: ${hash}`, 'success');
+            
+            const progressBar = document.getElementById('advanced-progress');
+            const resultsContainer = document.getElementById('advanced-results');
+            resultsContainer.innerHTML = '';
+            
+            let progress = 0;
+            
+            const crackInterval = setInterval(() => {
+                progress += 4;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(crackInterval);
+                    
+                    // สุ่มผลลัพธ์
+                    const hashMap = {
+                        "5f4dcc3b5aa765d61d8327deb882cf99": "password",
+                        "7c6a180b36896a0a8c02787eeafb0e4c": "password1",
+                        "6cb75f652a9b52798eb6cf2201057c73": "password123",
+                        "e10adc3949ba59abbe56e057f20f883e": "123456",
+                        "25f9e794323b453885f5181f1b624d0b": "123456789"
+                    };
+                    
+                    if (hashMap[hash]) {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item found">
+                                <strong>Crack Hash สำเร็จ!</strong><br>
+                                Hash: ${hash}<br>
+                                รหัสผ่าน: <strong>${hashMap[hash]}</strong>
+                            </div>
+                        `;
+                        
+                        addLog(`Crack Hash สำเร็จ: ${hash} -> ${hashMap[hash]}`, 'success');
+                    } else {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>ไม่สามารถ Crack Hash ได้</strong><br>
+                                ไม่พบรหัสผ่านสำหรับ Hash นี้
+                            </div>
+                        `;
+                        addLog('ไม่สามารถ Crack Hash ได้', 'error');
+                    }
+                }
+            }, 100);
+        });
+        
         // ฟังก์ชันคัดลอกข้อมูล
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
@@ -995,9 +1250,27 @@ moscow</textarea>
                     addLog(`เริ่มการทำงาน: ${this.textContent}`, 'info');
                     
                     // แสดง progress bar
-                    const progressBar = this.closest('.tab-content').querySelector('.progress');
-                    if (progressBar) {
-                        progressBar.style.width = '100%';
+                    const tabContent = this.closest('.tab-content');
+                    if (tabContent) {
+                        const progressBar = tabContent.querySelector('.progress');
+                        if (progressBar) {
+                            progressBar.style.width = '100%';
+                            
+                            // สุ่มผลลัพธ์หลังจาก delay
+                            setTimeout(() => {
+                                const resultsContainer = tabContent.querySelector('.results');
+                                if (resultsContainer) {
+                                    resultsContainer.innerHTML = `
+                                        <div class="result-item found">
+                                            <strong>การทำงานสำเร็จ!</strong><br>
+                                            ${this.textContent} ทำงานสำเร็จ<br>
+                                            <span class="success">พบข้อมูลหรือช่องโหว่</span>
+                                        </div>
+                                    `;
+                                }
+                                addLog(`${this.textContent} สำเร็จ`, 'success');
+                            }, 2000);
+                        }
                     }
                 });
             }
