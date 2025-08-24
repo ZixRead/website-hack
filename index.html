@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Security Scanner - สำหรับการศึกษาเท่านั้น</title>
+    <title>ULTIMATE SECURITY PENETRATION SUITE - สำหรับการศึกษาเท่านั้น</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/nparticles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -16,7 +16,7 @@
         body {
             font-family: 'Share Tech Mono', monospace;
             background-color: #0a0a0a;
-            color: #00ff41;
+            color: #ff003c;
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
@@ -30,7 +30,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -38,11 +38,11 @@
         .header {
             text-align: center;
             padding: 30px;
-            background: rgba(0, 20, 0, 0.6);
-            border: 1px solid #00ff41;
+            background: rgba(20, 0, 0, 0.6);
+            border: 1px solid #ff003c;
             border-radius: 10px;
             margin-bottom: 30px;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.6);
             position: relative;
             overflow: hidden;
         }
@@ -54,7 +54,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.3), transparent);
             animation: scan 3s linear infinite;
         }
         
@@ -64,51 +64,53 @@
         }
         
         h1, h2, h3 {
-            color: #00ff41;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+            color: #ff003c;
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.7);
             margin-bottom: 20px;
         }
         
         .warning {
-            background-color: rgba(80, 0, 0, 0.6);
+            background-color: rgba(60, 0, 0, 0.7);
             color: #ff5252;
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 30px;
-            border-left: 5px solid #ff5252;
-            box-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+            border-left: 5px solid #ff003c;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
         }
         
         .tabs {
             display: flex;
             margin-bottom: 20px;
-            border-bottom: 1px solid #00ff41;
+            border-bottom: 1px solid #ff003c;
+            flex-wrap: wrap;
         }
         
         .tab {
-            padding: 10px 20px;
-            background: rgba(0, 20, 0, 0.6);
-            border: 1px solid #00ff41;
+            padding: 12px 24px;
+            background: rgba(20, 0, 0, 0.6);
+            border: 1px solid #ff003c;
             border-bottom: none;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
             margin-right: 5px;
             transition: all 0.3s;
+            margin-bottom: 5px;
         }
         
         .tab.active {
-            background: rgba(0, 40, 0, 0.8);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+            background: rgba(40, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
         }
         
         .tab-content {
             display: none;
-            background: rgba(0, 20, 0, 0.6);
-            padding: 20px;
-            border: 1px solid #00ff41;
+            background: rgba(20, 0, 0, 0.6);
+            padding: 25px;
+            border: 1px solid #ff003c;
             border-radius: 0 5px 5px 5px;
             margin-bottom: 30px;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
         
         .tab-content.active {
@@ -122,16 +124,16 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #00ff41;
+            color: #ff003c;
         }
         
         input, textarea, select {
             width: 100%;
             padding: 12px;
-            background: rgba(0, 10, 0, 0.8);
-            border: 1px solid #00ff41;
+            background: rgba(10, 0, 0, 0.8);
+            border: 1px solid #ff003c;
             border-radius: 5px;
-            color: #00ff41;
+            color: #ff003c;
             font-family: 'Share Tech Mono', monospace;
         }
         
@@ -142,20 +144,28 @@
         
         button {
             padding: 12px 25px;
-            background: linear-gradient(135deg, #004d00, #008000);
+            background: linear-gradient(135deg, #800000, #ff003c);
             color: #000;
-            border: 1px solid #00ff41;
+            border: 1px solid #ff003c;
             border-radius: 5px;
             cursor: pointer;
             font-family: 'Share Tech Mono', monospace;
             font-weight: bold;
             transition: all 0.3s;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+            margin-right: 10px;
+            margin-bottom: 10px;
         }
         
         button:hover {
-            background: linear-gradient(135deg, #008000, #00c000);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+            background: linear-gradient(135deg, #a00000, #ff2d5f);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.8);
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
         }
         
         .results {
@@ -163,12 +173,12 @@
         }
         
         .result-item {
-            background: rgba(0, 20, 0, 0.6);
-            border: 1px solid #00ff41;
+            background: rgba(20, 0, 0, 0.6);
+            border: 1px solid #ff003c;
             border-radius: 5px;
             padding: 15px;
             margin-bottom: 15px;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.3);
         }
         
         .result-item.found {
@@ -177,25 +187,30 @@
         }
         
         .result-item.vulnerable {
-            border-color: #ff5252;
+            border-color: #ff003c;
             background: rgba(40, 0, 0, 0.6);
+        }
+        
+        .result-item.warning {
+            border-color: #ffcc00;
+            background: rgba(40, 40, 0, 0.6);
         }
         
         .log-container {
             background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #00ff41;
+            border: 1px solid #ff003c;
             border-radius: 5px;
             padding: 15px;
             margin-top: 30px;
             height: 300px;
             overflow-y: auto;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.3);
         }
         
         .log-entry {
             margin-bottom: 10px;
             font-size: 14px;
-            border-bottom: 1px solid #003300;
+            border-bottom: 1px solid #330000;
             padding-bottom: 5px;
         }
         
@@ -204,16 +219,20 @@
         }
         
         .error {
-            color: #ff5252;
+            color: #ff003c;
         }
         
         .warning-text {
             color: #ffcc00;
         }
         
+        .info {
+            color: #00a8ff;
+        }
+        
         .progress-bar {
             height: 10px;
-            background: rgba(0, 10, 0, 0.8);
+            background: rgba(10, 0, 0, 0.8);
             border-radius: 5px;
             margin: 15px 0;
             overflow: hidden;
@@ -221,7 +240,7 @@
         
         .progress {
             height: 100%;
-            background: linear-gradient(135deg, #004d00, #00ff41);
+            background: linear-gradient(135deg, #800000, #ff003c);
             width: 0%;
             transition: width 0.5s;
         }
@@ -229,15 +248,15 @@
         .tooltip {
             position: relative;
             display: inline-block;
-            border-bottom: 1px dotted #00ff41;
+            border-bottom: 1px dotted #ff003c;
             cursor: help;
         }
         
         .tooltip .tooltiptext {
             visibility: hidden;
             width: 200px;
-            background-color: #001100;
-            color: #00ff41;
+            background-color: #200000;
+            color: #ff003c;
             text-align: center;
             border-radius: 6px;
             padding: 5px;
@@ -248,7 +267,7 @@
             margin-left: -100px;
             opacity: 0;
             transition: opacity 0.3s;
-            border: 1px solid #00ff41;
+            border: 1px solid #ff003c;
         }
         
         .tooltip:hover .tooltiptext {
@@ -261,8 +280,8 @@
         }
         
         @keyframes glow {
-            from { box-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41; }
-            to { box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
+            from { box-shadow: 0 0 5px #ff003c, 0 0 10px #ff003c, 0 0 15px #ff003c; }
+            to { box-shadow: 0 0 10px #ff003c, 0 0 20px #ff003c, 0 0 30px #ff003c; }
         }
         
         .flashing {
@@ -274,6 +293,44 @@
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
+        
+        .credential-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(10, 0, 0, 0.8);
+            border: 1px solid #ff003c;
+            border-radius: 5px;
+        }
+        
+        .credential-item {
+            padding: 8px;
+            border-bottom: 1px solid #330000;
+            font-family: monospace;
+        }
+        
+        .credential-item:last-child {
+            border-bottom: none;
+        }
+        
+        .module {
+            background: rgba(20, 0, 0, 0.6);
+            border: 1px solid #ff003c;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.3);
+        }
+        
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ff003c;
+        }
     </style>
 </head>
 <body>
@@ -281,8 +338,8 @@
     
     <div class="container">
         <div class="header">
-            <h1>ADVANCED SECURITY SCANNER</h1>
-            <p>เครื่องมือจำลองการค้นหาช่องโหว่และรหัสผ่าน - สำหรับการศึกษาเท่านั้น</p>
+            <h1>ULTIMATE SECURITY PENETRATION SUITE</h1>
+            <p>เครื่องมือจำลองการเจาะระบบและทดสอบความปลอดภัย - สำหรับการศึกษาเท่านั้น</p>
         </div>
         
         <div class="warning">
@@ -290,17 +347,26 @@
         </div>
         
         <div class="tabs">
-            <div class="tab active" data-tab="password">ค้นหารหัสผ่าน</div>
-            <div class="tab" data-tab="vulnerability">ค้นหาช่องโหว่เว็บ</div>
-            <div class="tab" data-tab="bypass">Bypass การป้องกัน</div>
+            <div class="tab active" data-tab="password">โจมตีรหัสผ่าน</div>
+            <div class="tab" data-tab="vulnerability">สแกนช่องโหว่</div>
+            <div class="tab" data-tab="exploit">Exploit ช่องโหว่</div>
+            <div class="tab" data-tab="leaked">ข้อมูลรั่วไหล</div>
+            <div class="tab" data-tab="network">เครือข่าย</div>
         </div>
         
         <div class="tab-content active" id="password-tab">
-            <h2>ค้นหารหัสผ่านจากฟอร์มล็อกอิน</h2>
+            <h2>โจมตีรหัสผ่าน</h2>
             
             <div class="input-group">
                 <label for="target-url">URL เป้าหมาย:</label>
                 <input type="text" id="target-url" placeholder="https://example.com/login" value="">
+            </div>
+            
+            <div class="button-group">
+                <button id="brute-force" class="glow">Brute Force Attack</button>
+                <button id="dictionary" class="glow">Dictionary Attack</button>
+                <button id="cred-stuffing" class="glow">Credential Stuffing</button>
+                <button id="find-login" class="glow">ค้นหาหน้า Login</button>
             </div>
             
             <div class="input-group">
@@ -314,9 +380,30 @@
             </div>
             
             <div class="input-group">
-                <label for="wordlist">รายการรหัสผ่านสำหรับทดสอบ <span class="tooltip">(ℹ️)
-                    <span class="tooltiptext">รหัสผ่านแต่ละบรรทัด</span>
-                </span>:</label>
+                <label for="common-usernames">รายการชื่อผู้ใช้สำหรับทดสอบ:</label>
+                <textarea id="common-usernames" placeholder="ชื่อผู้ใช้แต่ละบรรทัด">admin
+administrator
+user
+test
+guest
+root
+support
+info
+webmaster
+admin1
+sysadmin
+operator
+superuser
+manager
+admin123
+qwerty
+demo
+sample
+service</textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="wordlist">รายการรหัสผ่านสำหรับทดสอบ:</label>
                 <textarea id="wordlist" placeholder="รหัสผ่านแต่ละบรรทัด">admin
 123456
 password
@@ -420,65 +507,33 @@ moon
 moscow</textarea>
             </div>
             
-            <div class="input-group">
-                <label for="common-usernames">รายการชื่อผู้ใช้สำหรับทดสอบ <span class="tooltip">(ℹ️)
-                    <span class="tooltiptext">ชื่อผู้ใช้แต่ละบรรทัด</span>
-                </span>:</label>
-                <textarea id="common-usernames" placeholder="ชื่อผู้ใช้แต่ละบรรทัด">admin
-administrator
-user
-test
-guest
-root
-support
-info
-webmaster
-admin1
-sysadmin
-operator
-superuser
-manager
-admin123
-qwerty
-demo
-sample
-service</textarea>
-            </div>
-            
-            <button id="start-password-scan" class="glow">เริ่มการสแกนรหัสผ่าน</button>
-            
             <div class="progress-bar">
                 <div class="progress" id="password-progress"></div>
             </div>
             
             <div class="results" id="password-results">
                 <div class="result-item">
-                    <strong>ยังไม่มีการสแกน</strong><br>
-                    ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการสแกน
+                    <strong>ยังไม่มีการโจมตี</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการโจมตี
                 </div>
             </div>
         </div>
         
         <div class="tab-content" id="vulnerability-tab">
-            <h2>ค้นหาช่องโหว่เว็บไซต์</h2>
+            <h2>สแกนช่องโหว่เว็บไซต์</h2>
             
             <div class="input-group">
                 <label for="vuln-target-url">URL เป้าหมาย:</label>
                 <input type="text" id="vuln-target-url" placeholder="https://example.com" value="">
             </div>
             
-            <div class="input-group">
-                <label for="scan-type">ประเภทการสแกน:</label>
-                <select id="scan-type">
-                    <option value="common">ทั่วไป (Common Vulnerabilities)</option>
-                    <option value="sql">SQL Injection</option>
-                    <option value="xss">XSS</option>
-                    <option value="lfi">Local File Inclusion</option>
-                    <option value="rce">Remote Code Execution</option>
-                </select>
+            <div class="button-group">
+                <button id="scan-sql" class="glow">สแกน SQL Injection</button>
+                <button id="scan-xss" class="glow">สแกน XSS</button>
+                <button id="scan-lfi" class="glow">สแกน LFI/RFI</button>
+                <button id="scan-rce" class="glow">สแกน RCE</button>
+                <button id="full-scan" class="glow">สแกนแบบเต็ม</button>
             </div>
-            
-            <button id="start-vuln-scan" class="glow">เริ่มการสแกนช่องโหว่</button>
             
             <div class="progress-bar">
                 <div class="progress" id="vuln-progress"></div>
@@ -492,41 +547,102 @@ service</textarea>
             </div>
         </div>
         
-        <div class="tab-content" id="bypass-tab">
-            <h2>Bypass การป้องกัน</h2>
+        <div class="tab-content" id="exploit-tab">
+            <h2>Exploit ช่องโหว่</h2>
             
             <div class="input-group">
-                <label for="bypass-target-url">URL เป้าหมาย:</label>
-                <input type="text" id="bypass-target-url" placeholder="https://example.com/admin" value="">
+                <label for="exploit-target-url">URL เป้าหมาย:</label>
+                <input type="text" id="exploit-target-url" placeholder="https://example.com/vulnerable.php" value="">
             </div>
             
             <div class="input-group">
-                <label for="bypass-method">วิธีการ Bypass:</label>
-                <select id="bypass-method">
-                    <option value="headers">Header Manipulation</option>
-                    <option value="encoding">Encoding</option>
-                    <option value="ip">IP Spoofing</option>
-                    <option value="waf">WAF Bypass</option>
+                <label for="exploit-type">ประเภทช่องโหว่:</label>
+                <select id="exploit-type">
+                    <option value="sql">SQL Injection</option>
+                    <option value="xss">XSS</option>
+                    <option value="lfi">Local File Inclusion</option>
+                    <option value="rce">Remote Code Execution</option>
+                    <option value="upload">File Upload</option>
                 </select>
             </div>
             
-            <button id="start-bypass" class="glow">เริ่มการ Bypass</button>
-            
-            <div class="progress-bar">
-                <div class="progress" id="bypass-progress"></div>
+            <div class="input-group">
+                <label for="exploit-payload">Payload (Optional):</label>
+                <textarea id="exploit-payload" placeholder="Payload สำหรับ exploit"></textarea>
             </div>
             
-            <div class="results" id="bypass-results">
+            <button id="run-exploit" class="glow">รัน Exploit</button>
+            
+            <div class="progress-bar">
+                <div class="progress" id="exploit-progress"></div>
+            </div>
+            
+            <div class="results" id="exploit-results">
                 <div class="result-item">
-                    <strong>ยังไม่มีการสแกน</strong><br>
-                    ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการสแกน
+                    <strong>ยังไม่มีการรัน Exploit</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากรัน Exploit
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="leaked-tab">
+            <h2>ข้อมูลรั่วไหล</h2>
+            
+            <div class="input-group">
+                <label for="search-query">ค้นหาข้อมูล:</label>
+                <input type="text" id="search-query" placeholder="อีเมล, ชื่อผู้ใช้, หรือโดเมน" value="">
+            </div>
+            
+            <button id="search-leaked" class="glow">ค้นหาข้อมูลรั่วไหล</button>
+            
+            <div class="progress-bar">
+                <div class="progress" id="leaked-progress"></div>
+            </div>
+            
+            <div class="results" id="leaked-results">
+                <div class="result-item">
+                    <strong>ยังไม่มีการค้นหา</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากค้นหา
+                </div>
+            </div>
+            
+            <h3>ข้อมูลที่พบ:</h3>
+            <div class="credential-list" id="leaked-credentials">
+                <div class="credential-item">ยังไม่มีข้อมูล</div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="network-tab">
+            <h2>การโจมตีเครือข่าย</h2>
+            
+            <div class="input-group">
+                <label for="target-ip">เป้าหมาย (IP หรือ Domain):</label>
+                <input type="text" id="target-ip" placeholder="192.168.1.1 หรือ example.com" value="">
+            </div>
+            
+            <div class="button-group">
+                <button id="scan-ports" class="glow">สแกนพอร์ต</button>
+                <button id="dos-attack" class="glow">DoS Attack</button>
+                <button id="arp-spoof" class="glow">ARP Spoofing</button>
+                <button id="scan-services" class="glow">สแกนบริการ</button>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="network-progress"></div>
+            </div>
+            
+            <div class="results" id="network-results">
+                <div class="result-item">
+                    <strong>ยังไม่มีการโจมตีเครือข่าย</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการโจมตี
                 </div>
             </div>
         </div>
         
         <h2>บันทึกการทำงาน</h2>
         <div class="log-container" id="log">
-            <div class="log-entry">[SYSTEM] ระบบพร้อมทำงาน</div>
+            <div class="log-entry success">[SYSTEM] ระบบพร้อมทำงาน</div>
+            <div class="log-entry warning-text">[WARNING] นี่เป็นแบบจำลองสำหรับการศึกษาเท่านั้น</div>
         </div>
     </div>
 
@@ -534,21 +650,21 @@ service</textarea>
         // ตั้งค่า particles.js
         particlesJS('particles-js', {
             particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#00ff41" },
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: "#ff003c" },
                 shape: { type: "circle" },
                 opacity: { value: 0.5, random: true },
                 size: { value: 3, random: true },
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: "#00ff41",
+                    color: "#ff003c",
                     opacity: 0.4,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 2,
+                    speed: 3,
                     direction: "none",
                     random: true,
                     straight: false,
@@ -579,7 +695,7 @@ service</textarea>
         });
         
         // ฟังก์ชันเพิ่ม log
-        function addLog(message, type = 'normal') {
+        function addLog(message, type = 'info') {
             const log = document.getElementById('log');
             const now = new Date();
             const timestamp = now.toTimeString().split(' ')[0];
@@ -591,192 +707,245 @@ service</textarea>
         }
         
         // ฟังก์ชันสแกนรหัสผ่าน
-        document.getElementById('start-password-scan').addEventListener('click', () => {
+        document.getElementById('brute-force').addEventListener('click', () => {
             const targetUrl = document.getElementById('target-url').value;
-            const usernameField = document.getElementById('username-field').value;
-            const passwordField = document.getElementById('password-field').value;
-            const wordlist = document.getElementById('wordlist').value.split('\n');
-            const usernames = document.getElementById('common-usernames').value.split('\n');
             
             if (!targetUrl) {
                 addLog('กรุณาระบุ URL เป้าหมาย', 'error');
                 return;
             }
             
-            addLog(`เริ่มสแกนรหัสผ่าน: ${targetUrl}`, 'success');
+            addLog(`เริ่มโจมตีแบบ Brute Force: ${targetUrl}`, 'success');
             
             const progressBar = document.getElementById('password-progress');
             const resultsContainer = document.getElementById('password-results');
             resultsContainer.innerHTML = '';
             
-            let found = false;
+            let progress = 0;
+            const totalAttempts = 1000;
             let attempts = 0;
-            const totalAttempts = wordlist.length * usernames.length;
             
-            const scanInterval = setInterval(() => {
+            const attackInterval = setInterval(() => {
+                attempts++;
+                progress = (attempts / totalAttempts) * 100;
+                progressBar.style.width = `${progress}%`;
+                
                 if (attempts >= totalAttempts) {
-                    clearInterval(scanInterval);
-                    if (!found) {
+                    clearInterval(attackInterval);
+                    
+                    // สุ่มผลลัพธ์
+                    if (Math.random() > 0.7) {
+                        const username = "admin";
+                        const password = "admin123";
+                        
                         resultsContainer.innerHTML = `
-                            <div class="result-item">
-                                <strong>ไม่พบรหัสผ่านที่ใช้งานได้</strong><br>
-                                ลองใช้รายการรหัสผ่านอื่นหรือชื่อผู้ใช้อื่น
+                            <div class="result-item found">
+                                <strong>พบรหัสผ่าน!</strong><br>
+                                URL: ${targetUrl}<br>
+                                ชื่อผู้ใช้: ${username}<br>
+                                รหัสผ่าน: <strong>${password}</strong><br>
+                                <button onclick="copyToClipboard('${username}:${password}')">คัดลอกข้อมูล</button>
                             </div>
                         `;
-                        addLog('การสแกนเสร็จสิ้น: ไม่พบรหัสผ่านที่ใช้งานได้', 'warning-text');
+                        
+                        addLog(`พบรหัสผ่าน: ${username}:${password}`, 'success');
+                    } else {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>ไม่พบรหัสผ่าน</strong><br>
+                                การโจมตีแบบ Brute Force ไม่สำเร็จ
+                            </div>
+                        `;
+                        addLog('การโจมตีแบบ Brute Force ไม่สำเร็จ', 'error');
                     }
-                    return;
                 }
-                
-                const usernameIndex = Math.floor(attempts / wordlist.length);
-                const passwordIndex = attempts % wordlist.length;
-                
-                const username = usernames[usernameIndex] || 'admin';
-                const password = wordlist[passwordIndex] || 'password';
-                
-                attempts++;
-                
-                // อัพเดท progress bar
-                progressBar.style.width = `${(attempts / totalAttempts) * 100}%`;
-                
-                // สุ่มผลลัพธ์เพื่อจำลอง (สำหรับการศึกษาเท่านั้น)
-                if (password.length >= 6 && attempts % 23 === 0) {
-                    found = true;
-                    clearInterval(scanInterval);
-                    
-                    resultsContainer.innerHTML = `
-                        <div class="result-item found">
-                            <strong>พบรหัสผ่านที่ใช้งานได้!</strong><br>
-                            URL: ${targetUrl}<br>
-                            ชื่อผู้ใช้: ${username}<br>
-                            รหัสผ่าน: <strong>${password}</strong><br>
-                            <button onclick="copyToClipboard('${username}:${password}')">คัดลอกข้อมูล</button>
-                        </div>
-                    `;
-                    
-                    addLog(`พบรหัสผ่าน: ${username}:${password}`, 'success');
-                } else {
-                    addLog(`ทดสอบ: ${username}:${password} - ไม่สำเร็จ`);
-                }
-            }, 50);
+            }, 10);
         });
         
-        // ฟังก์ชันสแกนช่องโหว่
-        document.getElementById('start-vuln-scan').addEventListener('click', () => {
-            const targetUrl = document.getElementById('vuln-target-url').value;
-            const scanType = document.getElementById('scan-type').value;
+        // ฟังก์ชันค้นหาหน้า Login
+        document.getElementById('find-login').addEventListener('click', () => {
+            const targetUrl = document.getElementById('target-url').value;
             
             if (!targetUrl) {
                 addLog('กรุณาระบุ URL เป้าหมาย', 'error');
                 return;
             }
             
-            addLog(`เริ่มสแกนช่องโหว่: ${targetUrl} (${scanType})`, 'success');
+            addLog(`กำลังค้นหาหน้า Login: ${targetUrl}`, 'success');
+            
+            const progressBar = document.getElementById('password-progress');
+            const resultsContainer = document.getElementById('password-results');
+            resultsContainer.innerHTML = '';
+            
+            let progress = 0;
+            
+            const findInterval = setInterval(() => {
+                progress += 2;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(findInterval);
+                    
+                    // สุ่มผลลัพธ์
+                    const loginPages = [
+                        "/login",
+                        "/admin",
+                        "/wp-login.php",
+                        "/signin",
+                        "/auth",
+                        "/account",
+                        "/administrator"
+                    ];
+                    
+                    const foundPages = [];
+                    
+                    for (let i = 0; i < 3; i++) {
+                        if (Math.random() > 0.5) {
+                            foundPages.push(loginPages[Math.floor(Math.random() * loginPages.length)]);
+                        }
+                    }
+                    
+                    if (foundPages.length > 0) {
+                        let pagesHTML = '';
+                        foundPages.forEach(page => {
+                            pagesHTML += `<li>${targetUrl}${page}</li>`;
+                        });
+                        
+                        resultsContainer.innerHTML = `
+                            <div class="result-item found">
+                                <strong>พบหน้า Login!</strong><br>
+                                หน้า Login ที่พบ:<br>
+                                <ul>${pagesHTML}</ul>
+                            </div>
+                        `;
+                        
+                        addLog(`พบหน้า Login: ${foundPages.join(', ')}`, 'success');
+                    } else {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>ไม่พบหน้า Login</strong><br>
+                                ไม่สามารถหาหน้า Login บนเว็บนี้ได้
+                            </div>
+                        `;
+                        addLog('ไม่พบหน้า Login', 'error');
+                    }
+                }
+            }, 50);
+        });
+        
+        // ฟังก์ชันค้นหาข้อมูลรั่วไหล
+        document.getElementById('search-leaked').addEventListener('click', () => {
+            const query = document.getElementById('search-query').value;
+            
+            if (!query) {
+                addLog('กรุณาระบุคำค้นหา', 'error');
+                return;
+            }
+            
+            addLog(`กำลังค้นหาข้อมูลรั่วไหล: ${query}`, 'success');
+            
+            const progressBar = document.getElementById('leaked-progress');
+            const resultsContainer = document.getElementById('leaked-results');
+            const credentialsContainer = document.getElementById('leaked-credentials');
+            resultsContainer.innerHTML = '';
+            
+            let progress = 0;
+            
+            const searchInterval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(searchInterval);
+                    
+                    // สุ่มผลลัพธ์
+                    if (Math.random() > 0.3) {
+                        const credentials = [
+                            "admin@example.com:admin123",
+                            "user@example.com:password123",
+                            "test@example.com:test123",
+                            "webmaster@example.com:web123",
+                            "admin:admin123"
+                        ];
+                        
+                        let credentialsHTML = '';
+                        credentials.forEach(cred => {
+                            credentialsHTML += `<div class="credential-item">${cred}</div>`;
+                        });
+                        
+                        credentialsContainer.innerHTML = credentialsHTML;
+                        
+                        resultsContainer.innerHTML = `
+                            <div class="result-item found">
+                                <strong>พบข้อมูลรั่วไหล!</strong><br>
+                                พบ ${credentials.length} รายการข้อมูลสำหรับ: ${query}
+                            </div>
+                        `;
+                        
+                        addLog(`พบข้อมูลรั่วไหล ${credentials.length} รายการ`, 'success');
+                    } else {
+                        credentialsContainer.innerHTML = '<div class="credential-item">ไม่พบข้อมูล</div>';
+                        
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>ไม่พบข้อมูลรั่วไหล</strong><br>
+                                ไม่พบข้อมูลรั่วไหลสำหรับ: ${query}
+                            </div>
+                        `;
+                        addLog('ไม่พบข้อมูลรั่วไหล', 'error');
+                    }
+                }
+            }, 100);
+        });
+        
+        // ฟังก์ชันสแกนช่องโหว่
+        document.getElementById('scan-sql').addEventListener('click', () => {
+            const targetUrl = document.getElementById('vuln-target-url').value;
+            
+            if (!targetUrl) {
+                addLog('กรุณาระบุ URL เป้าหมาย', 'error');
+                return;
+            }
+            
+            addLog(`กำลังสแกนช่องโหว่ SQL Injection: ${targetUrl}`, 'success');
             
             const progressBar = document.getElementById('vuln-progress');
             const resultsContainer = document.getElementById('vuln-results');
             resultsContainer.innerHTML = '';
             
             let progress = 0;
-            const vulnerabilities = [
-                "SQL Injection vulnerability in login form",
-                "XSS vulnerability in search parameter",
-                "Missing security headers",
-                "Sensitive data exposure",
-                "Cross-Site Request Forgery (CSRF) vulnerability",
-                "Server information disclosure",
-                "Insecure direct object references",
-                "Security misconfiguration",
-                "Broken authentication"
-            ];
             
             const scanInterval = setInterval(() => {
-                progress += 5;
+                progress += 2;
                 progressBar.style.width = `${progress}%`;
                 
                 if (progress >= 100) {
                     clearInterval(scanInterval);
                     
-                    // สุ่มผลลัพธ์ช่องโหว่
-                    const vulnCount = Math.floor(Math.random() * 3) + 1;
-                    let resultsHTML = '';
-                    
-                    if (vulnCount > 0) {
-                        for (let i = 0; i < vulnCount; i++) {
-                            const randomVuln = vulnerabilities[Math.floor(Math.random() * vulnerabilities.length)];
-                            resultsHTML += `
-                                <div class="result-item vulnerable">
-                                    <strong>พบช่องโหว่!</strong><br>
-                                    ${randomVuln}<br>
-                                    <span class="warning-text">ระดับความรุนแรง: ${Math.floor(Math.random() * 5) + 5}/10</span>
-                                </div>
-                            `;
-                            addLog(`พบช่องโหว่: ${randomVuln}`, 'error');
-                        }
+                    // สุ่มผลลัพธ์
+                    if (Math.random() > 0.5) {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item vulnerable">
+                                <strong>พบช่องโหว่ SQL Injection!</strong><br>
+                                URL: ${targetUrl}/product.php?id=1<br>
+                                พารามิเตอร์: id<br>
+                                ระดับความรุนแรง: สูง<br>
+                                <button onclick="exploitVulnerability('${targetUrl}/product.php?id=1', 'sql')">Exploit</button>
+                            </div>
+                        `;
+                        
+                        addLog('พบช่องโหว่ SQL Injection', 'success');
                     } else {
-                        resultsHTML = `
+                        resultsContainer.innerHTML = `
                             <div class="result-item">
-                                <strong>ไม่พบช่องโหว่ที่สำคัญ</strong><br>
+                                <strong>ไม่พบช่องโหว่ SQL Injection</strong><br>
                                 ระบบมีความปลอดภัยในระดับดี
                             </div>
                         `;
-                        addLog('ไม่พบช่องโหว่ที่สำคัญ', 'success');
-                    }
-                    
-                    resultsContainer.innerHTML = resultsHTML;
-                }
-            }, 100);
-        });
-        
-        // ฟังก์ชัน bypass
-        document.getElementById('start-bypass').addEventListener('click', () => {
-            const targetUrl = document.getElementById('bypass-target-url').value;
-            const bypassMethod = document.getElementById('bypass-method').value;
-            
-            if (!targetUrl) {
-                addLog('กรุณาระบุ URL เป้าหมาย', 'error');
-                return;
-            }
-            
-            addLog(`เริ่มกระบวนการ Bypass: ${targetUrl} (${bypassMethod})`, 'success');
-            
-            const progressBar = document.getElementById('bypass-progress');
-            const resultsContainer = document.getElementById('bypass-results');
-            resultsContainer.innerHTML = '';
-            
-            let progress = 0;
-            
-            const bypassInterval = setInterval(() => {
-                progress += 10;
-                progressBar.style.width = `${progress}%`;
-                
-                if (progress >= 100) {
-                    clearInterval(bypassInterval);
-                    
-                    // สุ่มผลลัพธ์ bypass
-                    const success = Math.random() > 0.3;
-                    
-                    if (success) {
-                        resultsContainer.innerHTML = `
-                            <div class="result-item found">
-                                <strong>Bypass สำเร็จ!</strong><br>
-                                ระบบการป้องกันถูก bypass แล้ว<br>
-                                <span class="warning-text">สามารถเข้าถึงระบบได้แล้ว</span>
-                            </div>
-                        `;
-                        addLog('Bypass การป้องกันสำเร็จ', 'success');
-                    } else {
-                        resultsContainer.innerHTML = `
-                            <div class="result-item">
-                                <strong>Bypass ไม่สำเร็จ</strong><br>
-                                ระบบการป้องกันยังคงทำงานอยู่<br>
-                                ลองใช้วิธีการอื่น
-                            </div>
-                        `;
-                        addLog('Bypass การป้องกันไม่สำเร็จ', 'error');
+                        addLog('ไม่พบช่องโหว่ SQL Injection', 'info');
                     }
                 }
-            }, 200);
+            }, 50);
         });
         
         // ฟังก์ชันคัดลอกข้อมูล
@@ -788,9 +957,51 @@ service</textarea>
             });
         }
         
+        // ฟังก์ชันสำหรับ exploit
+        function exploitVulnerability(url, type) {
+            addLog(`กำลัง exploit: ${url}`, 'success');
+            
+            const resultsContainer = document.getElementById('exploit-results');
+            resultsContainer.innerHTML = '';
+            
+            // จำลองการ exploit
+            setTimeout(() => {
+                if (type === 'sql') {
+                    resultsContainer.innerHTML = `
+                        <div class="result-item found">
+                            <strong>Exploit สำเร็จ!</strong><br>
+                            สามารถดึงข้อมูลจากฐานข้อมูลได้:<br>
+                            <div class="credential-list">
+                                <div class="credential-item">admin:5f4dcc3b5aa765d61d8327deb882cf99 (password)</div>
+                                <div class="credential-item">user:7c6a180b36896a0a8c02787eeafb0e4c (password1)</div>
+                                <div class="credential-item">test:6cb75f652a9b52798eb6cf2201057c73 (password123)</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    addLog('Exploit SQL Injection สำเร็จ', 'success');
+                }
+            }, 2000);
+        }
+        
         // เริ่มต้นระบบ
-        addLog('ระบบ Advanced Security Scanner พร้อมทำงาน', 'success');
+        addLog('ระบบ ULTIMATE SECURITY PENETRATION SUITE พร้อมทำงาน', 'success');
         addLog('คำเตือน: นี่เป็นแบบจำลองสำหรับการศึกษาเท่านั้น', 'warning-text');
+        
+        // เพิ่มการตอบสนองของปุ่มอื่นๆ
+        document.querySelectorAll('button').forEach(button => {
+            if (!button.onclick) {
+                button.addEventListener('click', function() {
+                    addLog(`เริ่มการทำงาน: ${this.textContent}`, 'info');
+                    
+                    // แสดง progress bar
+                    const progressBar = this.closest('.tab-content').querySelector('.progress');
+                    if (progressBar) {
+                        progressBar.style.width = '100%';
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
