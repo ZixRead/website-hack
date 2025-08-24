@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Security Scanner - สำหรับการศึกษาเท่านั้น</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/nparticles.js/2.0.0/particles.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: #0a0a0a;
+            color: #00ff41;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 20, 0, 0.6);
+            border: 1px solid #00ff41;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        h1, h2, h3 {
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .warning {
+            background-color: rgba(80, 0, 0, 0.6);
+            color: #ff5252;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff5252;
+            box-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #00ff41;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: rgba(0, 20, 0, 0.6);
+            border: 1px solid #00ff41;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: rgba(0, 40, 0, 0.8);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+        
+        .tab-content {
+            display: none;
+            background: rgba(0, 20, 0, 0.6);
+            padding: 20px;
+            border: 1px solid #00ff41;
+            border-radius: 0 5px 5px 5px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff41;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 10, 0, 0.8);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            color: #00ff41;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #004d00, #008000);
+            color: #000;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #008000, #00c000);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+        }
+        
+        .results {
+            margin-top: 30px;
+        }
+        
+        .result-item {
+            background: rgba(0, 20, 0, 0.6);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .result-item.found {
+            border-color: #00ff41;
+            background: rgba(0, 40, 0, 0.6);
+        }
+        
+        .result-item.vulnerable {
+            border-color: #ff5252;
+            background: rgba(40, 0, 0, 0.6);
+        }
+        
+        .log-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 30px;
+            height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .log-entry {
+            margin-bottom: 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #003300;
+            padding-bottom: 5px;
+        }
+        
+        .success {
+            color: #00ff41;
+        }
+        
+        .error {
+            color: #ff5252;
+        }
+        
+        .warning-text {
+            color: #ffcc00;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: rgba(0, 10, 0, 0.8);
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, #004d00, #00ff41);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #00ff41;
+            cursor: help;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #001100;
+            color: #00ff41;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid #00ff41;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41; }
+            to { box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
+        }
+        
+        .flashing {
+            animation: flashing 1s infinite;
+        }
+        
+        @keyframes flashing {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>ADVANCED SECURITY SCANNER</h1>
+            <p>เครื่องมือจำลองการค้นหาช่องโหว่และรหัสผ่าน - สำหรับการศึกษาเท่านั้น</p>
+        </div>
+        
+        <div class="warning">
+            <strong>คำเตือน:</strong> โปรแกรมนี้เป็นแบบจำลองสำหรับการศึกษาเท่านั้น การเข้าถึงระบบคอมพิวเตอร์ของผู้อื่นโดยไม่ได้รับอนุญาตเป็นสิ่งผิดกฎหมายตาม พ.ร.บ. คอมพิวเตอร์ฯ มาตรา 5 โปรดใช้ความรู้นี้เพื่อการป้องกันระบบเท่านั้น
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="password">ค้นหารหัสผ่าน</div>
+            <div class="tab" data-tab="vulnerability">ค้นหาช่องโหว่เว็บ</div>
+            <div class="tab" data-tab="bypass">Bypass การป้องกัน</div>
+        </div>
+        
+        <div class="tab-content active" id="password-tab">
+            <h2>ค้นหารหัสผ่านจากฟอร์มล็อกอิน</h2>
+            
+            <div class="input-group">
+                <label for="target-url">URL เป้าหมาย:</label>
+                <input type="text" id="target-url" placeholder="https://example.com/login" value="">
+            </div>
+            
+            <div class="input-group">
+                <label for="username-field">ชื่อฟิลด์ผู้ใช้:</label>
+                <input type="text" id="username-field" placeholder="username หรือ email" value="username">
+            </div>
+            
+            <div class="input-group">
+                <label for="password-field">ชื่อฟิลด์รหัสผ่าน:</label>
+                <input type="text" id="password-field" placeholder="password" value="password">
+            </div>
+            
+            <div class="input-group">
+                <label for="wordlist">รายการรหัสผ่านสำหรับทดสอบ <span class="tooltip">(ℹ️)
+                    <span class="tooltiptext">รหัสผ่านแต่ละบรรทัด</span>
+                </span>:</label>
+                <textarea id="wordlist" placeholder="รหัสผ่านแต่ละบรรทัด">admin
+123456
+password
+12345678
+qwerty
+123456789
+12345
+1234
+111111
+1234567
+dragon
+123123
+baseball
+abc123
+football
+monkey
+letmein
+shadow
+master
+666666
+qwertyuiop
+123321
+mustang
+1234567890
+michael
+654321
+superman
+1qaz2wsx
+7777777
+121212
+000000
+qazwsx
+123qwe
+killer
+trustno1
+jordan
+jennifer
+zxcvbnm
+asdfgh
+hunter
+buster
+soccer
+harley
+batman
+andrew
+tigger
+sunshine
+iloveyou
+2000
+charlie
+robert
+thomas
+hockey
+ranger
+daniel
+starwars
+klaster
+112233
+george
+computer
+michelle
+jessica
+pepper
+1111
+zxcvbn
+555555
+11111111
+131313
+freedom
+777777
+pass
+maggie
+159753
+aaaaaa
+ginger
+princess
+joshua
+cheese
+amanda
+summer
+love
+ashley
+nicole
+chelsea
+biteme
+matthew
+access
+yankees
+987654321
+dallas
+austin
+thunder
+taylor
+matrix
+mobilemail
+mom
+monitor
+monitoring
+montana
+moon
+moscow</textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="common-usernames">รายการชื่อผู้ใช้สำหรับทดสอบ <span class="tooltip">(ℹ️)
+                    <span class="tooltiptext">ชื่อผู้ใช้แต่ละบรรทัด</span>
+                </span>:</label>
+                <textarea id="common-usernames" placeholder="ชื่อผู้ใช้แต่ละบรรทัด">admin
+administrator
+user
+test
+guest
+root
+support
+info
+webmaster
+admin1
+sysadmin
+operator
+superuser
+manager
+admin123
+qwerty
+demo
+sample
+service</textarea>
+            </div>
+            
+            <button id="start-password-scan" class="glow">เริ่มการสแกนรหัสผ่าน</button>
+            
+            <div class="progress-bar">
+                <div class="progress" id="password-progress"></div>
+            </div>
+            
+            <div class="results" id="password-results">
+                <div class="result-item">
+                    <strong>ยังไม่มีการสแกน</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการสแกน
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="vulnerability-tab">
+            <h2>ค้นหาช่องโหว่เว็บไซต์</h2>
+            
+            <div class="input-group">
+                <label for="vuln-target-url">URL เป้าหมาย:</label>
+                <input type="text" id="vuln-target-url" placeholder="https://example.com" value="">
+            </div>
+            
+            <div class="input-group">
+                <label for="scan-type">ประเภทการสแกน:</label>
+                <select id="scan-type">
+                    <option value="common">ทั่วไป (Common Vulnerabilities)</option>
+                    <option value="sql">SQL Injection</option>
+                    <option value="xss">XSS</option>
+                    <option value="lfi">Local File Inclusion</option>
+                    <option value="rce">Remote Code Execution</option>
+                </select>
+            </div>
+            
+            <button id="start-vuln-scan" class="glow">เริ่มการสแกนช่องโหว่</button>
+            
+            <div class="progress-bar">
+                <div class="progress" id="vuln-progress"></div>
+            </div>
+            
+            <div class="results" id="vuln-results">
+                <div class="result-item">
+                    <strong>ยังไม่มีการสแกน</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการสแกน
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="bypass-tab">
+            <h2>Bypass การป้องกัน</h2>
+            
+            <div class="input-group">
+                <label for="bypass-target-url">URL เป้าหมาย:</label>
+                <input type="text" id="bypass-target-url" placeholder="https://example.com/admin" value="">
+            </div>
+            
+            <div class="input-group">
+                <label for="bypass-method">วิธีการ Bypass:</label>
+                <select id="bypass-method">
+                    <option value="headers">Header Manipulation</option>
+                    <option value="encoding">Encoding</option>
+                    <option value="ip">IP Spoofing</option>
+                    <option value="waf">WAF Bypass</option>
+                </select>
+            </div>
+            
+            <button id="start-bypass" class="glow">เริ่มการ Bypass</button>
+            
+            <div class="progress-bar">
+                <div class="progress" id="bypass-progress"></div>
+            </div>
+            
+            <div class="results" id="bypass-results">
+                <div class="result-item">
+                    <strong>ยังไม่มีการสแกน</strong><br>
+                    ผลลัพธ์จะแสดงที่นี่หลังจากเริ่มการสแกน
+                </div>
+            </div>
+        </div>
+        
+        <h2>บันทึกการทำงาน</h2>
+        <div class="log-container" id="log">
+            <div class="log-entry">[SYSTEM] ระบบพร้อมทำงาน</div>
+        </div>
+    </div>
+
+    <script>
+        // ตั้งค่า particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ff41" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00ff41",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+        
+        // ระบบแท็บ
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+            });
+        });
+        
+        // ฟังก์ชันเพิ่ม log
+        function addLog(message, type = 'normal') {
+            const log = document.getElementById('log');
+            const now = new Date();
+            const timestamp = now.toTimeString().split(' ')[0];
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.innerHTML = `[${timestamp}] ${message}`;
+            log.appendChild(logEntry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        // ฟังก์ชันสแกนรหัสผ่าน
+        document.getElementById('start-password-scan').addEventListener('click', () => {
+            const targetUrl = document.getElementById('target-url').value;
+            const usernameField = document.getElementById('username-field').value;
+            const passwordField = document.getElementById('password-field').value;
+            const wordlist = document.getElementById('wordlist').value.split('\n');
+            const usernames = document.getElementById('common-usernames').value.split('\n');
+            
+            if (!targetUrl) {
+                addLog('กรุณาระบุ URL เป้าหมาย', 'error');
+                return;
+            }
+            
+            addLog(`เริ่มสแกนรหัสผ่าน: ${targetUrl}`, 'success');
+            
+            const progressBar = document.getElementById('password-progress');
+            const resultsContainer = document.getElementById('password-results');
+            resultsContainer.innerHTML = '';
+            
+            let found = false;
+            let attempts = 0;
+            const totalAttempts = wordlist.length * usernames.length;
+            
+            const scanInterval = setInterval(() => {
+                if (attempts >= totalAttempts) {
+                    clearInterval(scanInterval);
+                    if (!found) {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>ไม่พบรหัสผ่านที่ใช้งานได้</strong><br>
+                                ลองใช้รายการรหัสผ่านอื่นหรือชื่อผู้ใช้อื่น
+                            </div>
+                        `;
+                        addLog('การสแกนเสร็จสิ้น: ไม่พบรหัสผ่านที่ใช้งานได้', 'warning-text');
+                    }
+                    return;
+                }
+                
+                const usernameIndex = Math.floor(attempts / wordlist.length);
+                const passwordIndex = attempts % wordlist.length;
+                
+                const username = usernames[usernameIndex] || 'admin';
+                const password = wordlist[passwordIndex] || 'password';
+                
+                attempts++;
+                
+                // อัพเดท progress bar
+                progressBar.style.width = `${(attempts / totalAttempts) * 100}%`;
+                
+                // สุ่มผลลัพธ์เพื่อจำลอง (สำหรับการศึกษาเท่านั้น)
+                if (password.length >= 6 && attempts % 23 === 0) {
+                    found = true;
+                    clearInterval(scanInterval);
+                    
+                    resultsContainer.innerHTML = `
+                        <div class="result-item found">
+                            <strong>พบรหัสผ่านที่ใช้งานได้!</strong><br>
+                            URL: ${targetUrl}<br>
+                            ชื่อผู้ใช้: ${username}<br>
+                            รหัสผ่าน: <strong>${password}</strong><br>
+                            <button onclick="copyToClipboard('${username}:${password}')">คัดลอกข้อมูล</button>
+                        </div>
+                    `;
+                    
+                    addLog(`พบรหัสผ่าน: ${username}:${password}`, 'success');
+                } else {
+                    addLog(`ทดสอบ: ${username}:${password} - ไม่สำเร็จ`);
+                }
+            }, 50);
+        });
+        
+        // ฟังก์ชันสแกนช่องโหว่
+        document.getElementById('start-vuln-scan').addEventListener('click', () => {
+            const targetUrl = document.getElementById('vuln-target-url').value;
+            const scanType = document.getElementById('scan-type').value;
+            
+            if (!targetUrl) {
+                addLog('กรุณาระบุ URL เป้าหมาย', 'error');
+                return;
+            }
+            
+            addLog(`เริ่มสแกนช่องโหว่: ${targetUrl} (${scanType})`, 'success');
+            
+            const progressBar = document.getElementById('vuln-progress');
+            const resultsContainer = document.getElementById('vuln-results');
+            resultsContainer.innerHTML = '';
+            
+            let progress = 0;
+            const vulnerabilities = [
+                "SQL Injection vulnerability in login form",
+                "XSS vulnerability in search parameter",
+                "Missing security headers",
+                "Sensitive data exposure",
+                "Cross-Site Request Forgery (CSRF) vulnerability",
+                "Server information disclosure",
+                "Insecure direct object references",
+                "Security misconfiguration",
+                "Broken authentication"
+            ];
+            
+            const scanInterval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(scanInterval);
+                    
+                    // สุ่มผลลัพธ์ช่องโหว่
+                    const vulnCount = Math.floor(Math.random() * 3) + 1;
+                    let resultsHTML = '';
+                    
+                    if (vulnCount > 0) {
+                        for (let i = 0; i < vulnCount; i++) {
+                            const randomVuln = vulnerabilities[Math.floor(Math.random() * vulnerabilities.length)];
+                            resultsHTML += `
+                                <div class="result-item vulnerable">
+                                    <strong>พบช่องโหว่!</strong><br>
+                                    ${randomVuln}<br>
+                                    <span class="warning-text">ระดับความรุนแรง: ${Math.floor(Math.random() * 5) + 5}/10</span>
+                                </div>
+                            `;
+                            addLog(`พบช่องโหว่: ${randomVuln}`, 'error');
+                        }
+                    } else {
+                        resultsHTML = `
+                            <div class="result-item">
+                                <strong>ไม่พบช่องโหว่ที่สำคัญ</strong><br>
+                                ระบบมีความปลอดภัยในระดับดี
+                            </div>
+                        `;
+                        addLog('ไม่พบช่องโหว่ที่สำคัญ', 'success');
+                    }
+                    
+                    resultsContainer.innerHTML = resultsHTML;
+                }
+            }, 100);
+        });
+        
+        // ฟังก์ชัน bypass
+        document.getElementById('start-bypass').addEventListener('click', () => {
+            const targetUrl = document.getElementById('bypass-target-url').value;
+            const bypassMethod = document.getElementById('bypass-method').value;
+            
+            if (!targetUrl) {
+                addLog('กรุณาระบุ URL เป้าหมาย', 'error');
+                return;
+            }
+            
+            addLog(`เริ่มกระบวนการ Bypass: ${targetUrl} (${bypassMethod})`, 'success');
+            
+            const progressBar = document.getElementById('bypass-progress');
+            const resultsContainer = document.getElementById('bypass-results');
+            resultsContainer.innerHTML = '';
+            
+            let progress = 0;
+            
+            const bypassInterval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(bypassInterval);
+                    
+                    // สุ่มผลลัพธ์ bypass
+                    const success = Math.random() > 0.3;
+                    
+                    if (success) {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item found">
+                                <strong>Bypass สำเร็จ!</strong><br>
+                                ระบบการป้องกันถูก bypass แล้ว<br>
+                                <span class="warning-text">สามารถเข้าถึงระบบได้แล้ว</span>
+                            </div>
+                        `;
+                        addLog('Bypass การป้องกันสำเร็จ', 'success');
+                    } else {
+                        resultsContainer.innerHTML = `
+                            <div class="result-item">
+                                <strong>Bypass ไม่สำเร็จ</strong><br>
+                                ระบบการป้องกันยังคงทำงานอยู่<br>
+                                ลองใช้วิธีการอื่น
+                            </div>
+                        `;
+                        addLog('Bypass การป้องกันไม่สำเร็จ', 'error');
+                    }
+                }
+            }, 200);
+        });
+        
+        // ฟังก์ชันคัดลอกข้อมูล
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                addLog('คัดลอกข้อมูลไปยังคลิปบอร์ดแล้ว', 'success');
+            }).catch(err => {
+                addLog('ไม่สามารถคัดลอกข้อมูลได้', 'error');
+            });
+        }
+        
+        // เริ่มต้นระบบ
+        addLog('ระบบ Advanced Security Scanner พร้อมทำงาน', 'success');
+        addLog('คำเตือน: นี่เป็นแบบจำลองสำหรับการศึกษาเท่านั้น', 'warning-text');
+    </script>
+</body>
+</html>
